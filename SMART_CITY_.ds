@@ -1,0 +1,3296 @@
+/*
+ * Author       : harish420s420
+ * Generated on : 29-Oct-2026 22:20:51
+ * Version      : 1.0
+ */
+ application "SMART_CITY "
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Complaint_Assignments
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Assignment_ID
+			(
+    			type = autonumber
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint
+			(
+				type = picklist	
+				values  = Smart_City_Complaints.ID
+    			displayformat = [Complaint_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Assigned_Staff
+			(
+				type = picklist	
+				values  = Staff_Profiles.ID
+    			displayformat = [Staff_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department
+			(
+				type = picklist	
+				values  = Departments.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Assignment_Date
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Task_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Assigned","Accepted","In Progress","On Hold","Completed","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Instructions
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Work_Started_Date
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_Date
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Staff_Remarks
+			(
+				type = list	
+				values = {"Choice 1","Choice 2","Choice 3"}
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Complaint_Categories
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Category_Name
+			(
+    			type = text
+				displayname = "Category Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Category_Code
+			(
+    			type = text
+				displayname = "Category Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Category_Description
+			(
+    			type = textarea
+				displayname = "Category Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Departments
+			(
+				type = picklist	
+				values  = Departments.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Default_Priority
+			(
+				type = picklist
+				displayname = "Default Priority"
+				maxchar = 100
+				values = {"Low","Medium","High","Critical"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have SLA_Days
+			(
+				type = number
+				displayname = "SLA Days"
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Is_Active
+			(
+    			type = checkbox
+				displayname = "Is Active"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Departments
+		{
+			success message = "Department Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Department_Name
+			(
+    			type = text
+				displayname = "Department Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have unique Department_Code
+			(
+    			type = text
+				displayname = "Department Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department_Description
+			(
+    			type = textarea
+				displayname = "Department Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department_Head_Email
+			(
+    			type = email
+				displayname = "Department Head Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Office_Address
+			(
+    			type = textarea
+				displayname = "Office Address"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have is_Active
+			(
+    			type = checkbox
+				displayname = "is Active"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Smart_City_Complaints
+		{
+			success message = "Data Added Successfully!"
+			Complaint_information
+			(
+				type = section
+				displayname = "Complaint information"
+				visibility = true
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Complaint_ID
+			(
+    			type = autonumber
+				displayname = "Complaint ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Title
+			(
+    			type = text
+				displayname = "Complaint Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Category
+			(
+				type = picklist	
+				displayname = "Complaint Category"
+				values  = Complaint_Categories.ID
+    			displayformat = [Category_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Responsible_Department
+			(
+				type = picklist	
+				values  = Departments.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			SLA_Deadline
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			SLA_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Within SLA","Due Soon","Overdue","Met"}
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Escalation_Level
+			(
+				type = picklist
+				maxchar = 100
+				values = {"None","Level 1","Level 2","Level 3"}
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Description
+			(
+				type = list	
+				values = {"Choice 1","Choice 2","Choice 3"}
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Photo
+			(
+    			type = image
+				displayname = "Complaint Photo"
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Reported_Date
+			(
+    			type = date
+				displayname = "Reported Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Priority
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Low","Medium","High","Critical"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Submitted","Under Review","Assigned","In Progress","On Hold","Resolved","Closed","Rejected","Reopened"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Citizen_information
+			(
+				type = section
+				displayname = "Citizen information"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Citizen_Name
+			(
+    			type = text
+				displayname = "Citizen Name"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			must have Citizen_Email
+			(
+    			type = email
+				displayname = "Citizen Email"
+				maxchar = 80
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Citizen_Phone
+			(
+    			type = phonenumber
+				displayname = "Citizen Phone"
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Complaint_location
+			(
+				type = section
+				displayname = "Complaint location"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			must have Ward
+			(
+				type = picklist	
+				values  = Wards.ID
+    			displayformat = [Ward_Name]
+				sortorder = ascending
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			must have Area_Name
+			(
+    			type = text
+				displayname = "Area Name"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			must have Street_Address
+			(
+    			type = textarea
+				displayname = "Street Address"
+				height = 100px
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Postal_Code
+			(
+    			type = text
+				displayname = "Postal Code"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Latitude
+			(
+				type = decimal
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Longitude
+			(
+				type = decimal
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Staff_Profiles
+		{
+			displayname = "Staff Profiles"
+			success message = "Staff Profile Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Staff_Name
+			(
+    			type = text
+				displayname = "Staff Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Employee_ID
+			(
+    			type = text
+				displayname = "Employee ID"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Staff_Email
+			(
+    			type = email
+				displayname = "Staff Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Phone_Number1
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Staff_Role
+			(
+				type = picklist
+				displayname = "Staff Role"
+				maxchar = 100
+				values = {"MUNICIPAL_ADMIN","DEPARTMENT_HEAD","GRIEVANCE_OFFICER","FIELD_STAFF"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Department
+			(
+				type = picklist	
+				values  = Departments.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Assigned_Ward
+			(
+				type = picklist	
+				displayname = "Assigned Ward"
+				values  = Wards.ID
+    			displayformat = [Ward_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Date_Joined
+			(
+    			type = date
+				displayname = "Date Joined"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Is_Active
+			(
+    			type = checkbox
+				displayname = "Is Active"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Wards
+		{
+			success message = "Ward Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Ward_Name
+			(
+    			type = text
+				displayname = "Ward Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Ward_Number
+			(
+				type = number
+				displayname = "Ward Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Area_Name
+			(
+    			type = text
+				displayname = "Area Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Postal_Code
+			(
+    			type = text
+				displayname = "Postal Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Responsible_Department
+			(
+				type = picklist	
+				displayname = "Responsible Department"
+				values  = Departments.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Ward_Description
+			(
+    			type = textarea
+				displayname = "Ward Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Is_Active
+			(
+    			type = checkbox
+				displayname = "Is Active"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Departments
+		{
+			displayName = "All Departments"
+			show all rows from Departments    
+			(
+				Department_Name as "Department Name"
+				Department_Code as "Department Code"
+				Department_Description as "Department Description"
+				Department_Head_Email as "Department Head Email"
+				Contact_Number as "Contact Number"
+				(
+					displayformat = plainnumber 
+				)
+				Office_Address as "Office Address"
+				is_Active as "is Active"
+			)
+		}
+		default list Complaint_Categories_Report
+		{
+			displayName = "Complaint_Categories Report"
+			show all rows from Complaint_Categories    
+			(
+				Category_Name as "Category Name"
+				Category_Code as "Category Code"
+				Category_Description as "Category Description"
+				Departments
+				Default_Priority as "Default Priority"
+				SLA_Days as "SLA Days"
+				Is_Active as "Is Active"
+			)
+		}
+		default list All_Wards
+		{
+			displayName = "All Wards"
+			show all rows from Wards    
+			(
+				Ward_Name as "Ward Name"
+				Ward_Number as "Ward Number"
+				Area_Name as "Area Name"
+				Postal_Code as "Postal Code"
+				Responsible_Department as "Responsible Department"
+				Ward_Description as "Ward Description"
+				Is_Active as "Is Active"
+			)
+		}
+		default list All_Staff_Profiles
+		{
+			displayName = "All Staff Profiles"
+			show all rows from Staff_Profiles    
+			(
+				Staff_Name as "Staff Name"
+				Employee_ID as "Employee ID"
+				Staff_Email as "Staff Email"
+				Phone_Number1 as "Phone Number"
+				(
+					displayformat = plainnumber 
+				)
+				Staff_Role as "Staff Role"
+				Department
+				Assigned_Ward as "Assigned Ward"
+				Date_Joined as "Date Joined"
+				Is_Active as "Is Active"
+			)
+		}
+		default list Smart_City_Complaints_Report
+		{
+			displayName = "Smart_City_Complaints Report"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Description
+				Complaint_Photo as "Complaint Photo"
+				Reported_Date as "Reported Date"
+				Priority
+				Status
+				Citizen_Name as "Citizen Name"
+				Citizen_Email as "Citizen Email"
+				Citizen_Phone as "Citizen Phone"
+				(
+					displayformat = plainnumber 
+				)
+				Ward
+				Area_Name as "Area Name"
+				Street_Address as "Street Address"
+				Postal_Code as "Postal Code"
+				Latitude
+				Longitude
+				Responsible_Department
+				SLA_Deadline
+				SLA_Status
+				Escalation_Level
+			)
+		}
+		default list Complaint_Assignments_Report
+		{
+			displayName = "Complaint_Assignments Report"
+			show all rows from Complaint_Assignments    
+			(
+				Assignment_ID
+				Complaint
+				Assigned_Staff
+				Department
+				Assignment_Date
+				Task_Status
+				Instructions
+				Work_Started_Date
+				Completion_Date
+				Staff_Remarks
+			)
+		}
+		list Overdue_Complaints
+		{
+			displayName = "Overdue Complaints"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Priority
+				Status
+				Responsible_Department as "Responsible Department"
+				Ward
+				Reported_Date as "Reported Date"
+				SLA_Deadline as "SLA Deadline"
+				(
+					displayformat = fulldate
+				)
+			)
+			filters
+			(
+				"Overdue and Active"  :  SLA_Deadline < "13-Oct-2026" && Status != "Resolved" && Status != "Closed" && Status != "Rejected"
+			)
+			sort by
+			(
+				SLA_Deadline ascending
+			)
+		}
+		list Department_Complaints
+		{
+			displayName = "Department-wise Complaints"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Priority
+				Status
+				Responsible_Department as "Responsible Department"
+				Ward
+				Reported_Date as "Reported Date"
+				SLA_Deadline as "SLA Deadline"
+			)
+			filters
+			(
+				Status
+				Priority
+			)
+			group by
+			(
+				Responsible_Department ascending
+			)
+			sort by
+			(
+				Responsible_Department ascending
+			)
+		}
+		list Pending_Complaints
+		{
+			displayName = "Pending Complaints"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Priority
+				Status
+				Responsible_Department as "Responsible Department"
+				Ward
+				Reported_Date as "Reported Date"
+				SLA_Deadline as "SLA Deadline"
+			)
+			filters
+			(
+				"Pending Status"  :  Status != "Resolved" && Status != "Closed" && Status != "Rejected"
+			)
+			sort by
+			(
+				Reported_Date descending
+			)
+		}
+		list Resolved_Complaints
+		{
+			displayName = "Resolved Complaints"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Priority
+				Status
+				Responsible_Department as "Responsible Department"
+				Ward
+				Reported_Date as "Reported Date"
+				SLA_Deadline as "SLA Deadline"
+			)
+			filters
+			(
+				"Resolved or Closed"  :  Status == "Resolved" || Status == "Closed"
+			)
+			sort by
+			(
+				Reported_Date descending
+			)
+		}
+		list All_Complaints
+		{
+			displayName = "All Complaints"
+			show all rows from Smart_City_Complaints    
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Priority
+				Status
+				Responsible_Department as "Responsible Department"
+				Ward
+				Reported_Date as "Reported Date"
+				SLA_Deadline as "SLA Deadline"
+			)
+			sort by
+			(
+				Reported_Date descending
+			)
+		}
+		list My_Complaints
+		{
+			displayName = "My_Complaints"
+			show all rows from Smart_City_Complaints  [Citizen_Email == zoho.loginuserid]  
+			(
+				Complaint_ID as "Complaint ID"
+				Complaint_Title as "Complaint Title"
+				Complaint_Category as "Complaint Category"
+				Responsible_Department
+				SLA_Deadline
+				SLA_Status
+				Escalation_Level
+				Description
+				Complaint_Photo as "Complaint Photo"
+				Reported_Date as "Reported Date"
+				Priority
+				Status
+				Citizen_Name as "Citizen Name"
+				Citizen_Email as "Citizen Email"
+				Citizen_Phone as "Citizen Phone"
+				(
+					displayformat = plainnumber 
+				)
+				Ward
+				Area_Name as "Area Name"
+				Street_Address as "Street Address"
+				Postal_Code as "Postal Code"
+				Latitude
+				Longitude
+			)
+		}
+	}
+	pages
+	{
+		page Municipal_Admin_Dashboard
+		{
+			displayname = "Municipal_Admin_Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<dsp id='html_snippet' elementName='HTML Snippet'\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet()\ncontent\n&lt;%{\n\t%&gt;\n&lt;style&gt;\n.sc-dashboard {\n  font-family: Arial, sans-serif;\n  color: #202943;\n  background: #f4f6fb;\n  padding: 24px;\n  border-radius: 12px;\n}\n.sc-dashboard * { box-sizing: border-box; }\n.sc-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 12px;\n  flex-wrap: wrap;\n  margin-bottom: 24px;\n}\n.sc-header h2 { margin: 0 0 8px; font-size: 26px; }\n.sc-muted { color: #7b8499; font-size: 13px; }\n.sc-badge {\n  background: #e6eaff;\n  color: #4d46d7;\n  padding: 10px 14px;\n  border-radius: 20px;\n  font-size: 12px;\n}\n.sc-cards {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n  gap: 16px;\n  margin-bottom: 22px;\n}\n.sc-card, .sc-panel {\n  background: white;\n  padding: 20px;\n  border-radius: 12px;\n  box-shadow: 0 3px 12px #1720330b;\n}\n.sc-card-label { color: #7b8499; font-size: 13px; }\n.sc-number { font-size: 30px; font-weight: 700; margin: 14px 0; }\n.sc-blue { border-top: 4px solid #4c7df0; }\n.sc-orange { border-top: 4px solid #f5a623; }\n.sc-green { border-top: 4px solid #17b881; }\n.sc-red { border-top: 4px solid #ef5350; }\n.sc-panels {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 18px;\n  margin-bottom: 22px;\n}\n.sc-panel h3 { margin: 0 0 18px; font-size: 17px; }\n.sc-bar-row {\n  display: grid;\n  grid-template-columns: 120px 1fr 25px;\n  align-items: center;\n  gap: 8px;\n  margin: 17px 0;\n  font-size: 12px;\n}\n.sc-track {\n  height: 10px;\n  border-radius: 10px;\n  background: #edf0f7;\n  overflow: hidden;\n}\n.sc-fill {\n  height: 100%;\n  background: #6559e8;\n  border-radius: 10px;\n}\n.sc-status-row {\n  display: flex;\n  justify-content: space-between;\n  padding: 13px 0;\n  border-bottom: 1px solid #edf0f5;\n  font-size: 13px;\n}\n.sc-tag {\n  padding: 5px 9px;\n  border-radius: 15px;\n  font-size: 11px;\n  background: #fff0d6;\n  color: #946200;\n}\n.sc-table-wrap { overflow-x: auto; }\n.sc-table { width: 100%; border-collapse: collapse; }\n.sc-table th, .sc-table td {\n  padding: 14px 10px;\n  border-bottom: 1px solid #edf0f5;\n  text-align: left;\n  font-size: 12px;\n  white-space: nowrap;\n}\n.sc-table th { background: #f8f9fc; color: #737e94; }\n.sc-footer { margin-top: 20px; font-size: 12px; color: #7b8499; }\n@media(max-width:800px) {\n  .sc-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }\n  .sc-panels { grid-template-columns: 1fr; }\n}\n@media(max-width:450px) {\n  .sc-dashboard { padding: 12px; }\n  .sc-cards { grid-template-columns: 1fr; }\n  .sc-bar-row { grid-template-columns: 95px 1fr 20px; }\n}\n&lt;/style&gt;\n\n&lt;div class=&quot;sc-dashboard&quot;&gt;\n\n  &lt;div class=&quot;sc-header&quot;&gt;\n    &lt;div&gt;\n      &lt;h2&gt;Municipal Dashboard&lt;/h2&gt;\n      &lt;div class=&quot;sc-muted&quot;&gt;\n        Smart City Complaint Management System\n      &lt;/div&gt;\n    &lt;/div&gt;\n    &lt;span class=&quot;sc-badge&quot;&gt;ADMIN OVERVIEW&lt;/span&gt;\n  &lt;/div&gt;\n\n  &lt;div class=&quot;sc-cards&quot;&gt;\n    &lt;div class=&quot;sc-card sc-blue&quot;&gt;\n      &lt;div class=&quot;sc-card-label&quot;&gt;Total Complaints&lt;/div&gt;\n      &lt;div class=&quot;sc-number&quot;&gt;12&lt;/div&gt;\n      &lt;div class=&quot;sc-muted&quot;&gt;All registered complaints&lt;/div&gt;\n    &lt;/div&gt;\n\n    &lt;div class=&quot;sc-card sc-orange&quot;&gt;\n      &lt;div class=&quot;sc-card-label&quot;&gt;Pending Complaints&lt;/div&gt;\n      &lt;div class=&quot;sc-number&quot;&gt;4&lt;/div&gt;\n      &lt;div class=&quot;sc-muted&quot;&gt;Waiting for action&lt;/div&gt;\n    &lt;/div&gt;\n\n    &lt;div class=&quot;sc-card sc-green&quot;&gt;\n      &lt;div class=&quot;sc-card-label&quot;&gt;Resolved Complaints&lt;/div&gt;\n      &lt;div class=&quot;sc-number&quot;&gt;5&lt;/div&gt;\n      &lt;div class=&quot;sc-muted&quot;&gt;Marked as resolved&lt;/div&gt;\n    &lt;/div&gt;\n\n    &lt;div class=&quot;sc-card sc-red&quot;&gt;\n      &lt;div class=&quot;sc-card-label&quot;&gt;Overdue Complaints&lt;/div&gt;\n      &lt;div class=&quot;sc-number&quot;&gt;2&lt;/div&gt;\n      &lt;div class=&quot;sc-muted&quot;&gt;Past the SLA deadline&lt;/div&gt;\n    &lt;/div&gt;\n  &lt;/div&gt;\n\n  &lt;div class=&quot;sc-panels&quot;&gt;\n    &lt;div class=&quot;sc-panel&quot;&gt;\n      &lt;h3&gt;Complaints by Department&lt;/h3&gt;\n\n      &lt;div class=&quot;sc-bar-row&quot;&gt;\n        &lt;span&gt;Roads&lt;/span&gt;\n        &lt;div class=&quot;sc-track&quot;&gt;&lt;div class=&quot;sc-fill&quot; style=&quot;width:80%&quot;&gt;&lt;/div&gt;&lt;/div&gt;\n        &lt;span&gt;8&lt;/span&gt;\n      &lt;/div&gt;\n\n      &lt;div class=&quot;sc-bar-row&quot;&gt;\n        &lt;span&gt;Sanitation&lt;/span&gt;\n        &lt;div class=&quot;sc-track&quot;&gt;&lt;div class=&quot;sc-fill&quot; style=&quot;width:50%&quot;&gt;&lt;/div&gt;&lt;/div&gt;\n        &lt;span&gt;5&lt;/span&gt;\n      &lt;/div&gt;\n\n      &lt;div class=&quot;sc-bar-row&quot;&gt;\n        &lt;span&gt;Water Supply&lt;/span&gt;\n        &lt;div class=&quot;sc-track&quot;&gt;&lt;div class=&quot;sc-fill&quot; style=&quot;width:40%&quot;&gt;&lt;/div&gt;&lt;/div&gt;\n        &lt;span&gt;4&lt;/span&gt;\n      &lt;/div&gt;\n\n      &lt;div class=&quot;sc-bar-row&quot;&gt;\n        &lt;span&gt;Drainage&lt;/span&gt;\n        &lt;div class=&quot;sc-track&quot;&gt;&lt;div class=&quot;sc-fill&quot; style=&quot;width:60%&quot;&gt;&lt;/div&gt;&lt;/div&gt;\n        &lt;span&gt;6&lt;/span&gt;\n      &lt;/div&gt;\n\n      &lt;div class=&quot;sc-bar-row&quot;&gt;\n        &lt;span&gt;Electricity&lt;/span&gt;\n        &lt;div class=&quot;sc-track&quot;&gt;&lt;div class=&quot;sc-fill&quot; style=&quot;width:30%&quot;&gt;&lt;/div&gt;&lt;/div&gt;\n        &lt;span&gt;3&lt;/span&gt;\n      &lt;/div&gt;\n    &lt;/div&gt;\n\n    &lt;div class=&quot;sc-panel&quot;&gt;\n      &lt;h3&gt;Complaint Status&lt;/h3&gt;\n\n      &lt;div class=&quot;sc-status-row&quot;&gt;\n        &lt;span&gt;Submitted&lt;/span&gt;&lt;span class=&quot;sc-tag&quot;&gt;4&lt;/span&gt;\n      &lt;/div&gt;\n      &lt;div class=&quot;sc-status-row&quot;&gt;\n        &lt;span&gt;Assigned&lt;/span&gt;&lt;span class=&quot;sc-tag&quot;&gt;3&lt;/span&gt;\n      &lt;/div&gt;\n      &lt;div class=&quot;sc-status-row&quot;&gt;\n        &lt;span&gt;In Progress&lt;/span&gt;&lt;span class=&quot;sc-tag&quot;&gt;2&lt;/span&gt;\n      &lt;/div&gt;\n      &lt;div class=&quot;sc-status-row&quot;&gt;\n        &lt;span&gt;Resolved&lt;/span&gt;&lt;span class=&quot;sc-tag&quot;&gt;5&lt;/span&gt;\n      &lt;/div&gt;\n      &lt;div class=&quot;sc-status-row&quot;&gt;\n        &lt;span&gt;Overdue&lt;/span&gt;&lt;span class=&quot;sc-tag&quot;&gt;2&lt;/span&gt;\n      &lt;/div&gt;\n    &lt;/div&gt;\n  &lt;/div&gt;\n\n  &lt;div class=&quot;sc-panel&quot;&gt;\n    &lt;h3&gt;Recent Complaints&lt;/h3&gt;\n    &lt;div class=&quot;sc-table-wrap&quot;&gt;\n      &lt;table class=&quot;sc-table&quot;&gt;\n        &lt;thead&gt;\n          &lt;tr&gt;\n            &lt;th&gt;Complaint ID&lt;/th&gt;\n            &lt;th&gt;Complaint&lt;/th&gt;\n            &lt;th&gt;Department&lt;/th&gt;\n            &lt;th&gt;Priority&lt;/th&gt;\n            &lt;th&gt;Status&lt;/th&gt;\n          &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Sample 001&lt;/td&gt;\n            &lt;td&gt;Road pothole&lt;/td&gt;\n            &lt;td&gt;Roads and Highway&lt;/td&gt;\n            &lt;td&gt;High&lt;/td&gt;\n            &lt;td&gt;In Progress&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Sample 002&lt;/td&gt;\n            &lt;td&gt;Garbage overflow&lt;/td&gt;\n            &lt;td&gt;Sanitation&lt;/td&gt;\n            &lt;td&gt;Medium&lt;/td&gt;\n            &lt;td&gt;Submitted&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Sample 003&lt;/td&gt;\n            &lt;td&gt;Water leakage&lt;/td&gt;\n            &lt;td&gt;Water Supply&lt;/td&gt;\n            &lt;td&gt;High&lt;/td&gt;\n            &lt;td&gt;Assigned&lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/table&gt;\n    &lt;/div&gt;\n  &lt;/div&gt;\n\n  &lt;div class=&quot;sc-footer&quot;&gt;\n    Smart City Administration \u00B7 Dashboard preview\n  &lt;/div&gt;\n\n&lt;/div&gt;\n&lt;%\n\n}%&gt;]]>\n</dsp>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<panel elementName='Panel'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FF4C2F'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '385'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'New employees this month'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='50%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\n\tcolor = '#FFFFFF'\n\tbgColor = '#0ABB51'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'media-1-ticket-76'\n\tsize = '32px'\n\tcornerRadius = '26px'\n\ticonType = 'solid'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '3px'\n\tcolor = '#0ABB51'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '120'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '3px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Open tickets today'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n\t\thAlign = 'right'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'All requests'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '3px'\n\tcolor = '#00D9B1'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '248'\n>\n</text>\n\n</pc>\n</pr>\n</pc><pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '7px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#00D9B1'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'ui-1-email-85'\n\tsize = '32px'\n\tcornerRadius = '26px'\n\ticonType = 'solid'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Region performance in this quarter'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginTop = '5px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#FF8318'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-chart-bar-33'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'solid'\n/>\n</pc><pc \n\t\n>\n\t<text \n\n\tmarginLeft = '5px'\n\tmarginTop = '5px'\n\tcolor = '#FF8318'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '15%'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			registration_workflows as "registration workflows"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Status == null || input.Status == "")
+										{
+											input.Status = "Submitted";
+										}
+										if(input.Reported_Date == null)
+										{
+											input.Reported_Date = zoho.currenttime;
+										}
+										if(input.Priority == null || input.Priority == "")
+										{
+											input.Priority = "Medium";
+										}
+						)
+					}
+				}
+
+			}
+			Validate_the_complaint as "Validate the complaint"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Complaint_Title == null || input.Complaint_Title.trim() == "")
+										{
+											alert "Please enter a complaint title.";
+											cancel submit;
+										}
+										if(input.Description == null || input.Description.trim() == "")
+										{
+											alert "Please describe the complaint.";
+											cancel submit;
+										}
+										if(input.Citizen_Name == null || input.Citizen_Name.trim() == "")
+										{
+											alert "Please enter your name.";
+											cancel submit;
+										}
+										if(input.Citizen_Email == null || input.Citizen_Email.trim() == "")
+										{
+											alert "Please enter your email address.";
+											cancel submit;
+										}
+										if(input.Street_Address == null || input.Street_Address.trim() == "")
+										{
+											alert "Please enter the complaint location.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Send_a_confirmation_email as "Send a confirmation email"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the complaint record details using the current input ID
+										complaintRecord = Smart_City_Complaints[ID == input.ID];
+										// Extract relevant details from the record
+										complaintRef = complaintRecord.Complaint_ID;
+										complaintTitle = complaintRecord.Complaint_Title;
+										complaintStatus = complaintRecord.Status;
+										citizenEmail = complaintRecord.Citizen_Email;
+										citizenName = complaintRecord.Citizen_Name;
+										// Validate that citizen email exists
+										if(citizenEmail != null && citizenEmail != "")
+										{
+											// Construct the email message
+											emailSubject = "Complaint Acknowledgment: " + complaintRef;
+											emailMessage = "<p>Dear " + citizenName + ",</p>" + "<p>We have received your complaint regarding <strong>" + complaintTitle + "</strong>.</p>" + "<p><strong>Complaint Reference Number:</strong> " + complaintRef + "</p>" + "<p><strong>Current Status:</strong> " + complaintStatus + "</p>" + "<p>We will review your complaint and update you shortly.</p>" + "<p>Thank you for bringing this to our attention.</p>" + "<p>Regards,<br>Smart City Grievance Team</p>";
+											// Send the email to the citizen
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :citizenEmail
+												subject :emailSubject
+												message :emailMessage
+												content type :HTML
+											]
+										}
+										else
+										{
+											info "Citizen email is missing. Cannot send acknowledgment email.";
+										}
+						)
+					}
+				}
+
+			}
+			Set_default_complaint_val as "Set default complaint values"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Reported_Date == null)
+										{
+											input.Reported_Date = zoho.currenttime;
+										}
+										if(input.Status == null || input.Status == "")
+										{
+											input.Status = "Submitted";
+										}
+										if(input.Priority == null || input.Priority == "")
+										{
+											input.Priority = "Medium";
+										}
+						)
+					}
+				}
+
+			}
+			Auto_Set_Category_Priorit as "Auto_Set_Category_Priority_SLA"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add or edit
+
+				on user input of Complaint_Category
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Complaint_Category != null)
+										{
+											selectedCategory = Complaint_Categories[ID == input.Complaint_Category];
+											if(selectedCategory.ID != null)
+											{
+												input.Priority = selectedCategory.Default_Priority;
+												if(selectedCategory.SLA_Days != null)
+												{
+													input.SLA_Deadline = zoho.currentdate.addDay(selectedCategory.SLA_Days);
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Calculate_the_SLA_deadlin as "Calculate the SLA deadline automatically"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Complaint_Category == null)
+										{
+											alert "Please select a complaint category.";
+											cancel submit;
+										}
+										if(input.SLA_Deadline == null)
+										{
+											alert "The SLA deadline could not be calculated. Please select the category again.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Update_Complaint_On_Assig as "Update_Complaint_On_Assignment"
+			{
+				type =  form
+				form = Complaint_Assignments
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Complaint != null)
+										{
+											complaintRecord = Smart_City_Complaints[ID == input.Complaint];
+											if(complaintRecord.ID != null)
+											{
+												complaintRecord.Status="Assigned";
+											}
+										}
+										if(input.Assignment_Date == null)
+										{
+											input.Assignment_Date = zoho.currentdate;
+										}
+						)
+					}
+				}
+
+			}
+			Update_SLA_Status_on_Resolution as "Update SLA Status on Resolution"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on edit
+
+				on user input of Status
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the current complaint record based on the input ID
+										complaintRecord = Smart_City_Complaints[ID == input.ID];
+										// Get the SLA deadline and current status
+										slaDeadline = complaintRecord.SLA_Deadline;
+										// Check if the record is being resolved (Status changed to Resolved or Closed)
+										if(input.Status == "Resolved" || input.Status == "Closed")
+										{
+											// Compare SLA deadline with current date
+											if(slaDeadline >= zoho.currentdate)
+											{
+												// Resolved on or before deadline
+												complaintRecord.SLA_Status="Met";
+											}
+											else
+											{
+												// Resolved after deadline
+												complaintRecord.SLA_Status="Overdue";
+											}
+										}
+										else if(input.Status == "Submitted" || input.Status == "Under Review" || input.Status == "Assigned" || input.Status == "In Progress" || input.Status == "On Hold" || input.Status == "Reopened")
+										{
+											// For non-resolved statuses, check if deadline has passed
+											if(slaDeadline < zoho.currentdate)
+											{
+												complaintRecord.SLA_Status="Overdue";
+											}
+											else
+											{
+												// Check if deadline is approaching (within 3 days)
+												daysRemaining = zoho.currentdate.daysBetween(slaDeadline);
+												if(daysRemaining <= 3)
+												{
+													complaintRecord.SLA_Status="Due Soon";
+												}
+												else
+												{
+													complaintRecord.SLA_Status="Within SLA";
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Notify_Assigned_Staff as "Notify_Assigned_Staff"
+			{
+				type =  form
+				form = Complaint_Assignments
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the assigned staff profile using the lookup field
+										assignedStaffRecord = Staff_Profiles[ID == input.Assigned_Staff];
+										// Fetch the complaint details using the lookup field
+										complaintRecord = Smart_City_Complaints[ID == input.Complaint];
+										// Fetch the department details using the lookup field
+										departmentRecord = Departments[ID == input.Department];
+										// Validate that all required records exist
+										if(assignedStaffRecord.ID != null && complaintRecord.ID != null && departmentRecord.ID != null)
+										{
+											// Extract staff email
+											staffEmail = assignedStaffRecord.Staff_Email;
+											// Extract complaint details
+											complaintTitle = complaintRecord.Complaint_Title;
+											complaintDescription = complaintRecord.Description;
+											complaintID = complaintRecord.Complaint_ID;
+											priority = complaintRecord.Priority;
+											// Extract department details
+											departmentName = departmentRecord.Department_Name;
+											// Extract assignment date
+											assignmentDate = input.Assignment_Date;
+											// Extract staff remarks if available
+											staffRemarks = input.Staff_Remarks;
+											// Construct the email message
+											emailMessage = "<p>Dear Staff Member,</p>";
+											emailMessage = emailMessage + "<p>You have been assigned a new complaint with the following details:</p>";
+											emailMessage = emailMessage + "<ul>";
+											emailMessage = emailMessage + "<li><strong>Complaint ID:</strong> " + complaintID + "</li>";
+											emailMessage = emailMessage + "<li><strong>Title:</strong> " + complaintTitle + "</li>";
+											emailMessage = emailMessage + "<li><strong>Priority:</strong> " + priority + "</li>";
+											emailMessage = emailMessage + "<li><strong>Department:</strong> " + departmentName + "</li>";
+											emailMessage = emailMessage + "<li><strong>Assignment Date:</strong> " + assignmentDate + "</li>";
+											if(staffRemarks != null && staffRemarks != "")
+											{
+												emailMessage = emailMessage + "<li><strong>Remarks:</strong> " + staffRemarks + "</li>";
+											}
+											emailMessage = emailMessage + "</ul>";
+											emailMessage = emailMessage + "<p>Please review the complaint and take appropriate action.</p>";
+											emailMessage = emailMessage + "<p>Best regards,<br>Smart City Management System</p>";
+											// Send the email
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :staffEmail
+												subject :"New Complaint Assignment: " + complaintTitle
+												message :emailMessage
+												content type :HTML
+											]
+										}
+										else
+										{
+											// Log error if any required record is missing
+											info "Error: Missing required data for email notification. Staff: " + assignedStaffRecord.ID + ", Complaint: " + complaintRecord.ID + ", Department: " + departmentRecord.ID;
+										}
+						)
+					}
+				}
+
+			}
+			Complaint_Resolved_Notification as "Complaint_Resolved_Notification"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the complaint record based on the current input ID
+										complaintRecord = Smart_City_Complaints[ID == input.ID];
+										// Check if the status is set to Resolved
+										if(complaintRecord.Status == "Resolved")
+										{
+											// Extract citizen details from the record
+											citizenEmail = complaintRecord.Citizen_Email;
+											citizenName = complaintRecord.Citizen_Name;
+											complaintTitle = complaintRecord.Complaint_Title;
+											complaintID = complaintRecord.Complaint_ID;
+											// Validate that citizen email exists
+											if(citizenEmail != null && !isBlank(citizenEmail))
+											{
+												// Prepare the email message
+												emailSubject = "Complaint " + complaintID + " - " + complaintTitle + " Resolved";
+												emailMessage = "<p>Dear " + citizenName + ",</p>";
+												emailMessage = emailMessage + "<p>We are pleased to inform you that your complaint (ID: " + complaintID + ") titled '" + complaintTitle + "' has been resolved.</p>";
+												emailMessage = emailMessage + "<p>Please check the status in the portal for further details.</p>";
+												emailMessage = emailMessage + "<p>Thank you for your feedback.</p>";
+												// Send the email notification
+												sendmail
+												[
+													from :zoho.adminuserid
+													to :citizenEmail
+													subject :emailSubject
+													message :emailMessage
+													content type :HTML
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Citizen_Status_Notification as "Citizen_Status_Notification"
+			{
+				type =  form
+				form = Smart_City_Complaints
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the current complaint record using the input ID
+										complaintRecord = Smart_City_Complaints[ID == input.ID];
+										// Validate that the record exists and email is available
+										if(complaintRecord != null && !complaintRecord.Citizen_Email.isNull())
+										{
+											// Get the new status value
+											newStatus = input.Status;
+											// Get citizen details
+											citizenName = ifNull(complaintRecord.Citizen_Name,"Valued Citizen");
+											citizenEmail = complaintRecord.Citizen_Email;
+											complaintTitle = ifNull(complaintRecord.Complaint_Title,"Your Complaint");
+											complaintID = ifNull(complaintRecord.Complaint_ID,complaintRecord.ID);
+											// Construct the email message
+											emailSubject = "Complaint Status Update: " + complaintTitle;
+											emailMessage = "<p>Dear " + citizenName + ",</p>";
+											emailMessage = emailMessage + "<p>We are writing to inform you that the status of your complaint has been updated.</p>";
+											emailMessage = emailMessage + "<p><strong>Complaint ID:</strong> " + complaintID + "</p>";
+											emailMessage = emailMessage + "<p><strong>Complaint Title:</strong> " + complaintTitle + "</p>";
+											emailMessage = emailMessage + "<p><strong>New Status:</strong> " + newStatus + "</p>";
+											emailMessage = emailMessage + "<p>If you have any questions regarding this update, please contact your local department.</p>";
+											emailMessage = emailMessage + "<p>Thank you for using our Smart City services.</p>";
+											emailMessage = emailMessage + "<p>Best Regards,<br>Smart City Administration</p>";
+											// Send the email notification
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :citizenEmail
+												subject :emailSubject
+												message :emailMessage
+												content type :HTML
+											]
+										}
+										else
+										{
+											info "Complaint record not found or citizen email is missing. Email notification skipped.";
+										}
+						)
+					}
+				}
+
+			}
+			complaint_in_the_assignme as "complaint in the assignment"
+			{
+				type =  form
+				form = Complaint_Assignments
+
+				record event = on add or edit
+
+				on user input of Complaint
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Complaint != null)
+										{
+											complaintRecord = Smart_City_Complaints[ID == input.Complaint];
+											if(complaintRecord.ID != null)
+											{
+												// Fill the department from the complaint
+												input.Department = complaintRecord.Responsible_Department;
+												// Find an active staff member in that department
+												if(complaintRecord.Responsible_Department != null)
+												{
+													staffRecord = Staff_Profiles[Department == complaintRecord.Responsible_Department && Is_Active == true];
+													if(staffRecord.ID != null)
+													{
+														input.Assigned_Staff = staffRecord.ID;
+													}
+													else
+													{
+														input.Assigned_Staff = null;
+														alert "No active staff member found in this department.";
+													}
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Grievance_Officer_Access"
+			{
+				name = "Grievance_Officer_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "citizen complaints, assigns field staff, and monitors complaint resolution\n"
+				ModulePermissions
+				{
+					Wards
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Wards={"View"}
+						}
+					}
+					Complaint_Categories
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Categories_Report={"View"}
+						}
+					}
+					Departments
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Staff_Profiles
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Staff_Profiles={"View"}
+						}
+					}
+					Complaint_Assignments
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Assignments_Report={"View","Edit"}
+						}
+					}
+					Smart_City_Complaints
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Complaints={"View","Edit"}
+						}
+					}
+				}
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Department_Head_Access"
+			{
+				name = "Department_Head_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Manages department complaints, monitors assignments, and reviews field staff progress.\n"
+				ModulePermissions
+				{
+					Wards
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Wards={"View"}
+						}
+					}
+					Complaint_Categories
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Categories_Report={"View"}
+						}
+					}
+					Departments
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Staff_Profiles
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Staff_Profiles={"View"}
+						}
+					}
+					Complaint_Assignments
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Assignments_Report={"View","Edit"}
+						}
+					}
+					Smart_City_Complaints
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Complaints={"View","Edit"}
+						}
+					}
+				}
+			}
+			"Field_Staff_Access"
+			{
+				name = "Field_Staff_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Views assigned complaint tasks and updates work progress.\n"
+				ModulePermissions
+				{
+					Wards
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Wards={"View"}
+						}
+					}
+					Complaint_Categories
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Categories_Report={"View"}
+						}
+					}
+					Departments
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Staff_Profiles
+					{
+						allFieldsVisible= true 
+					}
+					Complaint_Assignments
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Assignments_Report={"View","Edit"}
+						}
+					}
+					Smart_City_Complaints
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Complaints={"View"}
+						}
+					}
+				}
+			}
+			"Municipal_Admin_Access"
+			{
+				name = "Municipal_Admin_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Municipal administrator with full access to manage complaints, departments, categories, wards, staff profiles, and assignments.\n"
+				ModulePermissions
+				{
+					Wards
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Wards={"View","Edit","Delete"}
+						}
+					}
+					Complaint_Categories
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						ReportPermissions
+						{
+							Complaint_Categories_Report={"View","Edit","Delete"}
+						}
+						FieldPermissions
+						{
+							Departments{visibility:true,readonly:false}
+							Category_Description{visibility:true,readonly:false}
+							ZC_Record_Type{visibility:false}
+							Is_Active{visibility:true,readonly:false}
+							Category_Code{visibility:true,readonly:false}
+							Category_Name{visibility:true,readonly:false}
+							Default_Priority{visibility:true,readonly:false}
+							Section{visibility:false,readonly:false}
+							SLA_Days{visibility:true,readonly:false}
+						}
+					}
+					Departments
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View","Edit","Delete"}
+						}
+					}
+					Staff_Profiles
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Staff_Profiles={"View","Edit","Delete"}
+						}
+					}
+					Complaint_Assignments
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Assignments_Report={"View","Edit","Delete"}
+						}
+					}
+					Smart_City_Complaints
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Complaints={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+				ModulePermissions
+				{
+					Wards
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Wards={"View"}
+						}
+					}
+					Complaint_Categories
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Complaint_Categories_Report={"View"}
+						}
+					}
+					Departments
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Staff_Profiles
+					{
+						allFieldsVisible= true 
+					}
+					Complaint_Assignments
+					{
+						allFieldsVisible= true 
+					}
+					Smart_City_Complaints
+					{
+						enabled= Create,Viewall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							My_Complaints={"View"}
+						}
+					}
+				}
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"Municipal Admin"
+					{
+						description = "Manages all Smart City departments, complaints, staff, and application settings."
+						"Grievance Officer"
+						{
+							description = "Reviews complaints, assigns staff, and monitors resolution."
+							"Department Head"
+							{
+								description = "Oversees complaints and staff in the assigned department."
+								"Field Staff"
+								{
+									description = "Handles assigned complaint tasks and updates work progress."
+								}
+							}
+						}
+					}
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "SMA"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Complaint_Assignments
+			{
+				label placement = left
+			}
+			form Complaint_Categories
+			{
+				label placement = left
+			}
+			form Departments
+			{
+				label placement = left
+			}
+			form Smart_City_Complaints
+			{
+				label placement = left
+			}
+			form Staff_Profiles
+			{
+				label placement = left
+			}
+			form Wards
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Departments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Department_Name as "Department Name"
+								Department_Code as "Department Code"
+								Department_Description as "Department Description"
+								Department_Head_Email as "Department Head Email"
+								Contact_Number as "Contact Number"
+								Office_Address as "Office Address"
+								is_Active as "is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Department_Name as "Department Name"
+								Department_Code as "Department Code"
+								Department_Description as "Department Description"
+								Department_Head_Email as "Department Head Email"
+								Contact_Number as "Contact Number"
+								Office_Address as "Office Address"
+								is_Active as "is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Complaint_Categories_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Category_Name as "Category Name"
+								Category_Code as "Category Code"
+								Category_Description as "Category Description"
+								Departments
+								Default_Priority as "Default Priority"
+								SLA_Days as "SLA Days"
+								Is_Active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Category_Name as "Category Name"
+								Category_Code as "Category Code"
+								Category_Description as "Category Description"
+								Departments
+								Default_Priority as "Default Priority"
+								SLA_Days as "SLA Days"
+								Is_Active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Wards
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Ward_Name as "Ward Name"
+								Ward_Number as "Ward Number"
+								Area_Name as "Area Name"
+								Postal_Code as "Postal Code"
+								Responsible_Department as "Responsible Department"
+								Ward_Description as "Ward Description"
+								Is_Active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Ward_Name as "Ward Name"
+								Ward_Number as "Ward Number"
+								Area_Name as "Area Name"
+								Postal_Code as "Postal Code"
+								Responsible_Department as "Responsible Department"
+								Ward_Description as "Ward Description"
+								Is_Active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Staff_Profiles
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Staff_Name as "Staff Name"
+								Employee_ID as "Employee ID"
+								Staff_Email as "Staff Email"
+								Phone_Number1 as "Phone Number"
+								Staff_Role as "Staff Role"
+								Department
+								Assigned_Ward as "Assigned Ward"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Staff_Name as "Staff Name"
+								Employee_ID as "Employee ID"
+								Staff_Email as "Staff Email"
+								Phone_Number1 as "Phone Number"
+								Staff_Role as "Staff Role"
+								Department
+								Assigned_Ward as "Assigned Ward"
+								Date_Joined as "Date Joined"
+								Is_Active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Smart_City_Complaints_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Description
+								Complaint_Photo as "Complaint Photo"
+								Reported_Date as "Reported Date"
+								Priority
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Description
+								Complaint_Photo as "Complaint Photo"
+								Reported_Date as "Reported Date"
+								Priority
+								Status
+								Citizen_Name as "Citizen Name"
+								Citizen_Email as "Citizen Email"
+								Citizen_Phone as "Citizen Phone"
+								Ward
+								Area_Name as "Area Name"
+								Street_Address as "Street Address"
+								Postal_Code as "Postal Code"
+								Latitude
+								Longitude
+								Responsible_Department
+								SLA_Deadline
+								SLA_Status
+								Escalation_Level
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Complaint_Assignments_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Assignment_ID
+								Complaint
+								Assigned_Staff
+								Department
+								Assignment_Date
+								Task_Status
+								Instructions
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Assignment_ID
+								Complaint
+								Assigned_Staff
+								Department
+								Assignment_Date
+								Task_Status
+								Instructions
+								Work_Started_Date
+								Completion_Date
+								Staff_Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Overdue_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						complaint_details
+						(
+		     				title = "Complaint Details"
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Department_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						complaint_details
+						(
+		     				title = "Complaint Details"
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Pending_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						complaint_details
+						(
+		     				title = "Complaint Details"
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Resolved_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						complaint_details
+						(
+		     				title = "Complaint Details"
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						complaint_details
+						(
+		     				title = "Complaint Details"
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Priority
+								Status
+								Responsible_Department as "Responsible Department"
+								Ward
+								Reported_Date as "Reported Date"
+								SLA_Deadline as "SLA Deadline"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report My_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								SLA_Deadline
+								SLA_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Complaint_Title as "Complaint Title"
+								Complaint_Category as "Complaint Category"
+								Responsible_Department
+								SLA_Deadline
+								SLA_Status
+								Escalation_Level
+								Description
+								Complaint_Photo as "Complaint Photo"
+								Reported_Date as "Reported Date"
+								Priority
+								Status
+								Citizen_Name as "Citizen Name"
+								Citizen_Email as "Citizen Email"
+								Citizen_Phone as "Citizen Phone"
+								Ward
+								Area_Name as "Area Name"
+								Street_Address as "Street Address"
+								Postal_Code as "Postal Code"
+								Latitude
+								Longitude
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Departments
+				{
+					displayname = "Departments"
+					icon = "business-hierarchy-53"
+					form  Departments
+					{
+						icon = "business-hierarchy-53"
+					}
+					report All_Departments
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Complaint_Categories
+				{
+					displayname = "Complaint_Categories"
+					icon = "tech-desktop"
+					form  Complaint_Categories
+					{
+						icon = "tech-desktop"
+					}
+					report Complaint_Categories_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Wards
+				{
+					displayname = "Wards"
+					icon = "tech-desktop"
+					form  Wards
+					{
+						icon = "tech-desktop"
+					}
+					report All_Wards
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Staff_Profiles
+				{
+					displayname = "Staff Profiles"
+					icon = "holidays-sickle"
+					form  Staff_Profiles
+					{
+						icon = "holidays-sickle"
+					}
+					report All_Staff_Profiles
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Smart_City_Complaints
+				{
+					displayname = "Smart_City_Complaints"
+					icon = "tech-desktop"
+					form  Smart_City_Complaints
+					{
+						icon = "tech-desktop"
+					}
+					report Smart_City_Complaints_Report
+					{
+						icon = "tech-desktop"
+					}
+					report Overdue_Complaints
+					{
+						icon = "tech-desktop"
+					}
+					report Department_Complaints
+					{
+						icon = "tech-headphones"
+					}
+					report Pending_Complaints
+					{
+						icon = "ui-2-hourglass"
+					}
+					report Resolved_Complaints
+					{
+						icon = "design-bug"
+					}
+					report All_Complaints
+					{
+						icon = "travel-world"
+					}
+					report My_Complaints
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Complaint_Assignments
+				{
+					displayname = "Complaint_Assignments"
+					icon = "tech-desktop"
+					form  Complaint_Assignments
+					{
+						icon = "tech-desktop"
+					}
+					report Complaint_Assignments_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Municipal_Admin_Dashboard
+				{
+					displayname = "Municipal_Admin_Dashboard"
+					icon = "tech-desktop"
+					page Municipal_Admin_Dashboard
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Complaint_Assignments
+			{
+				label placement = auto
+			}
+			form Complaint_Categories
+			{
+				label placement = auto
+			}
+			form Departments
+			{
+				label placement = auto
+			}
+			form Smart_City_Complaints
+			{
+				label placement = auto
+			}
+			form Staff_Profiles
+			{
+				label placement = auto
+			}
+			form Wards
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Complaint_Assignments
+			{
+				label placement = auto
+			}
+			form Complaint_Categories
+			{
+				label placement = auto
+			}
+			form Departments
+			{
+				label placement = auto
+			}
+			form Smart_City_Complaints
+			{
+				label placement = auto
+			}
+			form Staff_Profiles
+			{
+				label placement = auto
+			}
+			form Wards
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = blue
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
